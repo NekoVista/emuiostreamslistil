@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>קיק ישראל · מי משדר עכשיו</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0e0f;--panel:#14171a;--soft:#1b1f23;--line:#2a2e33;--ink:#fff;--mute:#9aa0a6;--green:#53fc18;--green-ink:#071200;--live:#ff3b3b;--shadow:0 8px 24px rgba(0,0,0,.5);--gap:14px;
+--cur-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='s' x='-30%25' y='-30%25' width='170%25' height='170%25'%3E%3CfeDropShadow dx='0' dy='1.2' stdDeviation='1.1' flood-color='black' flood-opacity='.5'/%3E%3C/filter%3E%3C/defs%3E%3Cpath filter='url%28%23s%29' d='M6 3.5v21l5.4-5.2 3.6 8 3.9-1.8-3.6-7.9h7.6z' fill='white' stroke='%230b0e0f' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 6 4,default;
+--cur-hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='s' x='-30%25' y='-30%25' width='170%25' height='170%25'%3E%3CfeDropShadow dx='0' dy='1.2' stdDeviation='1.1' flood-color='black' flood-opacity='.5'/%3E%3C/filter%3E%3C/defs%3E%3Cpath filter='url%28%23s%29' d='M11.5 4.2C11.5 3 12.4 2.2 13.5 2.2C14.6 2.2 15.5 3 15.5 4.2V12.1C15.8 11.7 16.3 11.5 16.9 11.5C17.9 11.5 18.6 12.1 18.8 12.8C19.1 12.4 19.6 12.2 20.2 12.2C21.2 12.2 21.9 12.8 22.1 13.6C22.4 13.3 22.9 13.1 23.4 13.1C24.5 13.1 25.3 13.9 25.3 15V20C25.3 24.6 22 28 18 28H15.6C13.4 28 12 27.1 10.9 25.6L6.6 19.6C6.1 18.8 6.3 17.9 7 17.5C7.7 17.1 8.6 17.3 9.2 17.9L11.5 20.2Z' fill='%2353fc18' stroke='%230b0e0f' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 14 3,pointer}
+*{box-sizing:border-box}
+/* ===== סמן עכבר: חץ גדול וברור, יד על דברים שאפשר ללחוץ, ו-I רגיל בשדות טקסט ===== */
+html,body{cursor:var(--cur-arrow)}
+a,button,select,summary,label,input[type=range],input[type=file],[role=tab],[role=button],.sc,.ct,.chip,.bell,.rail-btn{cursor:var(--cur-hand)}
+input[type=search],input[type=text],textarea{cursor:text}
+button:disabled,[aria-disabled=true]{cursor:not-allowed}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Heebo,Arial,sans-serif;line-height:1.5}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+button,input,select{font:inherit;color:var(--ink)}
+[hidden]{display:none!important}
+a{color:inherit}
+
+/* ===== כותרת עליונה ===== */
+.mus{display:flex;align-items:center;gap:8px}
+.mus input{width:80px;accent-color:var(--green)}
+.nbell .wv{display:none}.nbell.on .wv{display:inline}.nbell.on .mx{display:none}
+.nbell.on{border-color:var(--green)}
+.clock{display:flex;flex-direction:column;align-items:center;line-height:1.15;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:4px 12px;min-width:96px;flex:none;font-variant-numeric:tabular-nums}
+.clock b{font-size:18px;font-weight:800;letter-spacing:.04em;direction:ltr;unicode-bidi:isolate}
+.clock .cs{color:var(--green)}
+.clock small{font-size:11px;color:var(--mute)}
+.tbtn{position:absolute;top:44px;inset-inline-end:8px;z-index:2;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.72);display:grid;place-items:center;opacity:0;transition:opacity .15s,background .15s,transform .1s}
+.tbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sc:hover .tbtn,.sc:focus-within .tbtn{opacity:1}
+.tbtn:hover{background:#000;transform:scale(1.1)}
+@media (hover:none){.tbtn{opacity:1}}
+.herotb{position:absolute;z-index:4;top:12px;inset-inline-end:12px;background:rgba(0,0,0,.65);border:0;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;opacity:0;transition:opacity .15s,background .15s}
+.herotb svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stage:hover .herotb,.herotb:focus-visible{opacity:1}.herotb:hover{background:#000}
+@media (hover:none){.herotb{opacity:1}}
+.modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.72);backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px;animation:in .2s both}
+.mbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;width:min(480px,100%);max-height:92vh;overflow:auto;display:grid;gap:10px;box-shadow:var(--shadow)}
+.mbox h3{margin:0;font-size:18px;font-weight:800}.mbox h3 span{color:var(--green)}
+.mprev{aspect-ratio:16/9;background:var(--soft);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;place-items:center;color:var(--mute);font-size:13px}
+.mprev img{width:100%;height:100%;object-fit:cover;display:block}
+.mbox input[type=text],.mbox input[type=password]{width:100%;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 12px;transition:border-color .15s}
+.mbox input[type=text]:focus,.mbox input[type=password]:focus{border-color:var(--green);outline:none}
+.mbox input[type=file]{color:var(--mute);font-size:13px}
+.mbox input[type=file]::file-selector-button{cursor:var(--cur-hand);background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 12px;margin-inline-end:10px;font-weight:700}
+.mbox small{color:var(--mute);font-size:12px;line-height:1.5}
+.mrow{display:flex;gap:8px;flex-wrap:wrap}
+.dur{position:absolute;bottom:8px;inset-inline-start:8px;background:rgba(0,0,0,.75);border-radius:5px;padding:0 7px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.dtab{margin-top:12px;display:grid;gap:6px}
+.dr{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,.8fr)) 118px;gap:10px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px}
+.dr.hd{background:none;border:0;color:var(--mute);font-size:12px;padding-block:2px}
+.dr a{font-weight:800;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.dr a:hover{color:var(--green)}
+.dr .n{font-variant-numeric:tabular-nums}
+.dr .n.t{color:var(--green);font-weight:800}
+.dr .bars{display:flex;align-items:flex-end;gap:3px;height:26px;direction:ltr}
+.dr .bars i{flex:1;background:var(--line);border-radius:2px;min-height:2px}
+.dr .bars i.on{background:var(--green)}
+.dr .lv{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-inline-end:6px}
+@media (max-width:700px){.dr{grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr) minmax(0,.8fr)}.dr .a,.dr .bars{display:none}}
+.nbw,.mus{flex:none}
+.nbell{flex:none;min-width:40px}
+.nbw{position:relative}
+.nbell{position:relative;width:40px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--soft);display:grid;place-items:center;transition:border-color .15s,background .15s}
+.nbell:hover,.nbell[aria-expanded=true]{border-color:var(--green)}
+.nbell svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nbell .bd{position:absolute;top:-5px;inset-inline-end:-5px;background:var(--green);color:var(--green-ink);border-radius:999px;font-size:11px;font-weight:900;min-width:18px;height:18px;padding:0 4px;display:grid;place-items:center}
+.nbell.shake svg{animation:ringb 1.6s ease-in-out 1s 2;transform-origin:50% 10%}
+@keyframes ringb{0%,100%{transform:rotate(0)}15%{transform:rotate(14deg)}30%{transform:rotate(-12deg)}45%{transform:rotate(8deg)}60%{transform:rotate(-5deg)}}
+.npanel{position:fixed;z-index:60;width:min(390px,calc(100vw - 24px));max-height:70vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:14px 16px}
+.npanel h3{margin:0 0 2px;font-size:17px;font-weight:800}
+.npanel h3 span{color:var(--green)}
+.npanel .vd{color:var(--mute);font-size:12px;margin-bottom:10px}
+.npanel ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.npanel li{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.45}
+.bar::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:.45;pointer-events:none}
+.bar{position:sticky;top:0;z-index:30;background:rgba(11,14,15,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1560px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:9px 20px;flex-wrap:wrap}
+.brand{font-weight:900;font-size:22px;letter-spacing:.02em;white-space:nowrap}
+.brand b{color:var(--green)}
+.tabs{display:flex;gap:2px}
+.tab{background:none;border:0;border-radius:8px;padding:8px 14px;font-weight:700;color:var(--mute);position:relative;transition:color .15s,background .15s}
+.tab:hover{color:var(--ink);background:var(--soft)}
+.tab[aria-selected=true]{color:var(--ink)}
+.tab[aria-selected=true]::after{content:"";position:absolute;inset-inline:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--green)}
+.tab .n{background:var(--green);color:var(--green-ink);border-radius:999px;font-size:11px;padding:0 7px;margin-inline-start:6px;font-weight:900}
+.search{flex:1;min-width:180px;max-width:420px;margin-inline:auto}
+.search input{width:100%;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;transition:border-color .15s,box-shadow .15s}
+.search input:hover,.search input:focus{border-color:var(--green)}
+.search input:focus{box-shadow:0 0 0 3px rgba(83,252,24,.18);outline:none}
+.go{background:var(--green);color:var(--green-ink);border:0;border-radius:8px;padding:8px 16px;font-weight:800;transition:filter .15s,transform .1s}
+.go:hover{filter:brightness(1.1)}.go:active{transform:scale(.97)}
+a.go{display:inline-block;text-decoration:none}
+.acct{display:flex;align-items:center;gap:8px}
+.me{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px 3px 4px;font-weight:700;font-size:14px}
+.me img,.me .av{width:26px;height:26px;border-radius:50%;object-fit:cover;background:var(--green);flex:none}
+.me a{color:var(--mute);font-size:12px;text-decoration:none;margin-inline-start:4px}
+.me a:hover{color:var(--ink)}
+
+main{max-width:1560px;margin:0 auto;padding:14px 20px 56px}
+.status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mute);margin:0 0 10px}
+.ring{width:13px;height:13px;border-radius:50%;background:conic-gradient(var(--green) var(--p,0%),var(--line) 0)}
+.err{background:var(--panel);border:1px solid var(--live);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.err b{color:var(--live)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);margin-inline-end:8px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.3}}
+
+/* ===== גיבור: שידור מומלץ + פיד ===== */
+.hero2{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(280px,1fr);gap:16px}
+.stage{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#101315;border:1px solid var(--line)}
+.stage .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.88));pointer-events:none}
+.stage-link{position:absolute;inset:0;z-index:1}
+.cap{position:absolute;inset-inline:0;bottom:0;z-index:2;display:flex;align-items:flex-end;gap:12px;padding:16px 18px 34px;pointer-events:none}
+.cap .av,.cap .avl{width:48px;height:48px;font-size:20px}
+.cap .txt{min-width:0;flex:1}
+.cap .nm{font-size:clamp(18px,2.2vw,26px);font-weight:800;line-height:1.15}
+.cap .tt{color:#d3d6d9;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cap .tags{margin-top:6px}
+.watch{pointer-events:auto;background:var(--green);color:var(--green-ink);text-decoration:none;font-weight:800;border-radius:8px;padding:9px 18px;white-space:nowrap;transition:filter .15s}
+.watch:hover{filter:brightness(1.1)}
+.stage .vw{position:absolute;top:12px;inset-inline-start:12px;z-index:2}
+.dots{position:absolute;z-index:3;bottom:10px;inset-inline:0;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.dots button{pointer-events:auto;width:18px;height:5px;border-radius:3px;border:0;padding:0;background:rgba(255,255,255,.35);transition:background .15s,width .15s}
+.dots button[aria-current=true]{background:var(--green);width:26px}
+.arrows{position:absolute;z-index:3;bottom:6px;inset-inline-end:12px;display:flex;gap:4px}
+.arrows button{background:rgba(0,0,0,.55);border:0;border-radius:6px;width:28px;height:24px;display:grid;place-items:center;transition:background .15s}
+.arrows button:hover{background:rgba(0,0,0,.85)}
+.arrows svg,.rail-btn svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.feed{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:260px;overflow:hidden}
+.feed-in{position:absolute;inset:0;display:flex;flex-direction:column}
+.feed h3{margin:0;padding:11px 14px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.feed-body{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:7px;scrollbar-width:thin}
+.msg{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+.msg .un{font-weight:700;text-decoration:none;margin-inline-end:6px}
+.msg .un:hover{text-decoration:underline}
+.msg .tx{display:block;color:#a9aeb3;font-size:12px}
+.newline{display:flex;align-items:center;gap:8px;color:var(--green);font-size:12px;font-weight:700;margin:4px 0}
+.newline::before,.newline::after{content:"";flex:1;height:1px;background:var(--green);opacity:.6}
+.pin{margin:10px;padding:10px 12px;background:var(--soft);border:1px solid var(--line);border-radius:10px;font-size:13px;display:flex;align-items:center;gap:10px}
+.pin b{font-weight:800}
+.pin a{text-decoration:none}
+.pin small{display:block;color:var(--mute)}
+
+/* ===== באנר סאבתון ===== */
+.promo{position:relative;display:flex;align-items:center;justify-content:center;gap:18px;width:100%;margin:16px 0 10px;padding:14px 20px;min-height:84px;border-radius:12px;border:1px solid #2c6b13;color:#fff;text-align:center;overflow:hidden;background:linear-gradient(90deg,#0d2405,#1b5a0b 50%,#0d2405);transition:border-color .15s,transform .15s}
+.promo::before,.promo::after{content:"";position:absolute;top:-20%;bottom:-20%;width:18%;background:repeating-linear-gradient(60deg,rgba(83,252,24,.25) 0 14px,transparent 14px 28px);opacity:.7}
+.promo::before{inset-inline-start:0}.promo::after{inset-inline-end:0}
+.promo:hover{border-color:var(--green);transform:translateY(-1px)}
+.promo>*{position:relative;z-index:1}
+.promo img{width:48px;height:48px;border-radius:50%;box-shadow:0 0 0 2px #000;flex:none}
+.promo .pt{font-size:clamp(16px,2.4vw,24px);font-weight:800;letter-spacing:.01em}
+.promo .pc{font-variant-numeric:tabular-nums;color:#d7ffc3;font-weight:700;font-size:14px}
+.promo .cta{background:var(--green);color:var(--green-ink);border-radius:8px;padding:7px 16px;font-weight:800;white-space:nowrap}
+.statline{box-shadow:0 0 0 1px rgba(83,252,24,.08),0 6px 20px rgba(0,0,0,.35);display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:0 auto 6px;width:fit-content;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 18px;font-size:13px;color:#d3d6d9}
+.statline b{font-variant-numeric:tabular-nums;color:#fff}
+.statline .sep{width:1px;height:14px;background:var(--line)}
+
+/* ===== כותרות וקרוסלות ===== */
+.sec{margin-top:26px}
+.h2{margin:0 0 12px;font-size:22px;font-weight:800}
+.h2 b{color:var(--green);font-weight:800}
+.h3{margin:0 0 10px;font-size:20px;font-weight:800;display:flex;align-items:baseline;gap:10px}
+.h3 button{background:none;border:0;padding:0;font:inherit;font-weight:800;color:#fff;text-align:start}
+.h3 button:hover{color:var(--green)}
+.h3 small{color:var(--mute);font-size:13px;font-weight:500}
+.railwrap{position:relative}
+.row{--cols:6;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));gap:var(--gap);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:2px}
+.row::-webkit-scrollbar{display:none}
+.row>*{scroll-snap-align:start;min-width:0}
+.row.c5{--cols:5}.row.c9{--cols:9}
+.row.expanded{grid-auto-flow:row;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));grid-auto-columns:auto;overflow:visible}
+.rail-btn{position:absolute;top:calc(50% - 40px);z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(11,14,15,.92);display:grid;place-items:center;box-shadow:var(--shadow);transition:background .15s,border-color .15s}
+.rail-btn:hover{background:#000;border-color:var(--green)}
+.rail-btn.next{inset-inline-end:-10px}.rail-btn.prev{inset-inline-start:-10px}
+[dir=rtl] .rail-btn.next svg,[dir=rtl] .arrows .nx svg{transform:scaleX(-1)}
+[dir=rtl] .rail-btn.prev svg,[dir=rtl] .arrows .pv svg{transform:scaleX(1)}
+.row.expanded+.rail-btn{display:none}
+
+/* ===== כרטיס סטרים ===== */
+.sc{position:relative;display:block;min-width:0}
+.sc .scl{display:block;text-decoration:none;color:inherit;transition:transform .18s}
+.sc:hover .scl{transform:translateY(-3px)}
+.th{box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.th{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#1b1f23,#101315);border:2px solid transparent;transition:border-color .15s}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.sc:hover .th,.sc:focus-within .th{border-color:var(--green)}
+.vw{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.75);border-radius:5px;padding:1px 8px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.vw::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.th .vw{position:absolute;top:8px;inset-inline-start:8px}
+.rk{position:absolute;bottom:8px;inset-inline-end:8px;background:rgba(0,0,0,.75);border-radius:5px;padding:0 7px;font-size:12px;font-weight:700;color:var(--green)}
+.meta{display:flex;gap:10px;padding-top:9px}
+.av,.avl{width:34px;height:34px;border-radius:50%;flex:none;object-fit:cover;background:var(--line)}
+.avl{display:grid;place-items:center;font-weight:800;color:#0b0e0f;font-size:15px}
+.info{min-width:0;flex:1}
+.nm{font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.tt{color:var(--mute);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.gm{color:var(--mute);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.tags{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
+.tag2{background:#26292e;color:#d7dadd;border-radius:5px;padding:0 7px;font-size:11px;font-weight:600}
+.bell{position:absolute;top:8px;inset-inline-end:8px;z-index:2;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.72);color:#fff;font-size:16px;line-height:1;display:grid;place-items:center;opacity:0;transition:opacity .15s,background .15s,transform .1s}
+.sc:hover .bell,.sc:focus-within .bell,.bell[aria-pressed=true]{opacity:1}
+.bell:hover{background:#000;transform:scale(1.1)}
+.bell[aria-pressed=true]{background:var(--green);color:var(--green-ink)}
+@media (hover:none){.bell{opacity:1}}
+
+/* ===== כרטיס קטגוריה ===== */
+.ct{display:block;background:none;border:0;padding:0;text-align:start;color:inherit;min-width:0}
+.cv{position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;border:2px solid transparent;transition:border-color .15s}
+.cv img{width:100%;height:100%;object-fit:cover;display:block}
+.cv .ini{position:absolute;inset:0;display:grid;place-items:center;font-size:34px;font-weight:900;color:rgba(255,255,255,.85);padding:8px;text-align:center;line-height:1.1}
+.cv .vw{position:absolute;top:8px;inset-inline-start:8px}
+.ct:hover .cv,.ct:focus-visible .cv{border-color:var(--green)}
+.ct .nm{margin-top:8px}
+
+/* ===== לוחות מובילים ===== */
+.lbs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lb{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.lb h3{margin:0;font-size:16px;font-weight:700;display:flex;justify-content:space-between;gap:8px}
+.lb h3 i{font-style:normal;color:var(--mute);font-size:13px;border:1px solid var(--line);border-radius:50%;width:20px;height:20px;display:grid;place-items:center}
+.lb .sub2{color:var(--mute);font-size:12px;margin:2px 0 10px}
+.lb .hd{display:flex;justify-content:space-between;color:var(--mute);font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.lb ol{list-style:none;margin:0;padding:0}
+.lb li{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid var(--line)}
+.lb li:last-child{border-bottom:0}
+.lb .rank{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#0b0e0f;flex:none}
+.lb li:nth-child(1) .rank{background:#f5b800}.lb li:nth-child(2) .rank{background:#b9c0c8}.lb li:nth-child(3) .rank{background:#c77a3b}
+.lb .av,.lb .avl{width:28px;height:28px;font-size:13px}
+.lb a.who{text-align:right;flex:1;min-width:0;font-weight:700;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb a.who:hover{color:var(--green)}
+.lb .val{font-weight:700;font-variant-numeric:tabular-nums}
+.lb .none{color:var(--mute);padding:14px 8px;font-size:14px}
+
+/* ===== כללי ===== */
+.more{display:block;margin:16px auto 0;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 22px;font-weight:700;transition:border-color .15s}
+.more:hover{border-color:var(--green)}
+.sk{aspect-ratio:16/9;border-radius:10px;background:linear-gradient(90deg,var(--panel),var(--soft),var(--panel));background-size:200% 100%;animation:sh 1.2s infinite}
+.sk.tall{aspect-ratio:3/4}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{padding:44px;text-align:center;color:var(--mute);background:var(--panel);border:1px dashed var(--line);border-radius:12px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.tools h2{margin:0;font-size:22px;font-weight:800;flex:1}
+select{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 14px;transition:border-color .15s}
+select:hover{border-color:var(--green)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:thin}
+.chip{flex:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;font-weight:500;transition:border-color .15s,background .15s}
+.chip:hover{border-color:var(--green)}
+.chip[aria-pressed=true]{background:var(--green);color:var(--green-ink);border-color:var(--green);font-weight:700}
+.chip small{opacity:.7;margin-inline-start:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px 14px}
+
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+.box h2{margin:0 0 4px;font-size:19px;font-weight:800}
+.box h2 span{color:var(--green)}
+.box p{margin:0;color:var(--mute);font-size:14px}
+.gta{border-inline-start:5px solid var(--green);margin-top:26px}
+.gta .list{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.subh{margin:0 0 10px;font-size:15px;font-weight:700;color:var(--mute)}
+.list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.list li{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.list a{font-weight:800;color:var(--ink);text-decoration:none}.list a:hover{color:var(--green)}
+.list .m{color:var(--mute);font-size:13px}
+.on,.box .on,.list .on{color:var(--green)!important;font-weight:700}
+.tag{display:inline-block;font-size:11px;font-weight:800;border-radius:4px;padding:1px 8px;background:var(--green);color:var(--green-ink);margin-inline-end:8px}
+.tag.plan{background:var(--soft);color:var(--mute);border:1px solid var(--line)}
+.cd{display:flex;gap:10px;margin-top:12px}
+.cd div{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px}
+.cd b{display:block;font-size:28px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;line-height:1.1}
+.cd span{font-size:12px;color:var(--mute)}
+.stats2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.st b{display:block;font-size:30px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--green)}
+.st span{font-size:12px;color:var(--mute)}
+.chart{direction:ltr;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--mute);font-size:11px;font-family:Inter,Heebo,Arial,sans-serif}
+.add{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.add input{flex:1;min-width:200px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.add input:focus,.add input:hover{border-color:var(--green);outline:none}
+.ghost{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;transition:border-color .15s}
+.ghost:hover{border-color:var(--green)}
+.toasts{position:fixed;bottom:16px;inset-inline-start:16px;z-index:50;display:grid;gap:8px;max-width:min(360px,calc(100vw - 32px))}
+.toast{background:var(--panel);border:1px solid var(--green);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);animation:in .25s both;display:flex;gap:10px;align-items:center;justify-content:space-between}
+.toast a{color:var(--green);font-weight:800;text-decoration:none}
+.toast small{display:block;color:var(--mute);font-weight:400}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+details{margin-top:24px}summary{font-weight:700;color:var(--mute)}
+textarea{width:100%;min-height:80px;margin-top:8px;direction:ltr;font-family:monospace;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px}
+
+/* ===== לשונית "בקרוב": כרטיס הסאבתון ===== */
+.sub{background:#000c1b;background-image:radial-gradient(ellipse at 50% 0%,rgba(30,70,120,.45),transparent 65%),radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 1.6px);background-size:auto,15px 15px;border:1px solid #16314d;border-radius:18px;padding:30px 18px 26px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.sub::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55));pointer-events:none}
+.sub>*{position:relative;z-index:1}
+.sub img{width:clamp(96px,20vw,132px);height:clamp(96px,20vw,132px);border-radius:50%;display:block;margin:0 auto 14px;box-shadow:0 0 0 2px #000,0 8px 26px rgba(0,0,0,.6)}
+.sub h2{margin:0;font-size:clamp(34px,8vw,64px);font-weight:900;line-height:1.1;color:#fff;letter-spacing:-.01em;text-shadow:-3px -3px 0 #000,3px -3px 0 #000,-3px 3px 0 #000,3px 3px 0 #000,0 -3px 0 #000,0 3px 0 #000,-3px 0 0 #000,3px 0 0 #000,0 6px 14px rgba(0,0,0,.6)}
+.sub .badge{display:inline-block;margin:14px 0 12px;background:#ff5b87;color:#0a0f0c;border:4px solid #0a0f0c;border-radius:14px;padding:2px 26px 4px;font-size:clamp(26px,6vw,44px);font-weight:900;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.sub .date{font-size:clamp(30px,7vw,56px);font-weight:900;line-height:1.1;color:#f8c810;text-shadow:-3px -3px 0 #000,3px -3px 0 #000,-3px 3px 0 #000,3px 3px 0 #000,0 -3px 0 #000,0 3px 0 #000,-3px 0 0 #000,3px 0 0 #000}
+.sub .cd{justify-content:center;margin-top:20px;flex-wrap:wrap}
+.sub .cd div{background:rgba(0,12,27,.82);border:2px solid #f8c810;min-width:78px}
+.sub .cd b{color:#f8c810;font-size:clamp(28px,6vw,40px)}
+.sub .done{font-size:clamp(34px,8vw,60px);font-weight:900;line-height:1.1;color:#f8c810;margin-top:18px;text-shadow:-3px -3px 0 #000,3px -3px 0 #000,-3px 3px 0 #000,3px 3px 0 #000,0 -3px 0 #000,0 3px 0 #000,-3px 0 0 #000,3px 0 0 #000;animation:pop .5s both}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
+.sub .gtac{display:inline-block;margin-top:18px;background:rgba(0,12,27,.82);border:2px solid #ff5b87;border-radius:12px;padding:8px 18px;font-weight:700}
+.sub .gtac b{color:#ff5b87;font-size:26px;font-weight:900;margin-inline-end:6px;font-variant-numeric:tabular-nums}
+.sub .who{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.sub .who a{background:rgba(0,12,27,.82);border:1px solid #16314d;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:#fff;text-decoration:none}
+.sub .who a:hover{border-color:#ff5b87}
+.sub .note{margin:14px 0 0;color:#b8c7d6;font-size:14px}
+
+/* ===== פוטר ===== */
+.kf{border-top:1px solid var(--line);margin-top:20px;padding:34px 20px 40px}
+.kf-in{max-width:1560px;margin:0 auto;display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:28px}
+.kf .lg{font-size:30px;font-weight:900;color:var(--green);letter-spacing:.01em}
+.kf p{color:var(--mute);font-size:13px;margin:8px 0 0;max-width:34ch}
+.kf h4{margin:0 0 10px;font-size:14px;font-weight:800;color:var(--green)}
+.kf ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.kf a,.kf button{color:#d3d6d9;font-size:13px;text-decoration:none;background:none;border:0;padding:0;text-align:start}
+.kf a:hover,.kf button:hover{color:var(--green)}
+
+@media (max-width:1100px){.row{--cols:4}.row.c5{--cols:4}.row.c9{--cols:6}.hero2{grid-template-columns:1fr}.feed{min-height:300px}.lbs{grid-template-columns:1fr}.kf-in{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){main{padding:10px 12px 40px}.bar-in{padding:8px 12px;gap:10px}.search{order:5;flex-basis:100%;max-width:none}.mus input{display:none}.tabs{order:4;flex-basis:100%;overflow-x:auto;scrollbar-width:none}.tab{white-space:nowrap}.row{--cols:2.3}.row.c5{--cols:2.3}.row.c9{--cols:3.3}.cap{padding:10px 12px 30px}.cap .av,.cap .avl{display:none}.promo{gap:10px;padding:10px}.promo img{display:none}.rail-btn{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.h2{font-size:19px}.kf-in{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand">ישראל <b>LIVE</b></div>
+  <div class="clock" id="clock" role="timer" aria-label="שעון ישראל"><b><span id="ckT">--:--</span><span class="cs" id="ckS">:--</span></b><small id="ckD">&nbsp;</small></div>
+  <nav class="tabs" role="tablist" aria-label="ניווט">
+    <button class="tab" role="tab" id="t-live" aria-selected="true" data-tab="live">חי עכשיו</button>
+    <button class="tab" role="tab" id="t-follow" aria-selected="false" data-tab="follow">המעקב שלי<span class="n" id="followN" hidden></span></button>
+    <button class="tab" role="tab" id="t-stats" aria-selected="false" data-tab="stats">היו בלייב</button>
+    <button class="tab" role="tab" id="t-new" aria-selected="false" data-tab="new">מה חדש<span class="n" id="newN" hidden></span></button>
+    <button class="tab" role="tab" id="t-soon" aria-selected="false" data-tab="soon">בקרוב</button>
+  </nav>
+  <div class="search"><input type="search" id="q" placeholder="חיפוש סטרימר, משחק או כותרת" aria-label="חיפוש"></div>
+  <div class="acct" id="acct"></div>
+  <div class="mus"><button class="nbell" id="mbtn" type="button" aria-pressed="false" title="הפעל מוזיקה" aria-label="הפעל מוזיקה"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path class="wv" d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/><path class="mx" d="M16 9l5 6M21 9l-5 6"/></svg></button><input type="range" id="mvol" min="0" max="1" step="0.05" value="0.35" aria-label="עוצמת מוזיקה"></div>
+  <div class="nbw"><button class="nbell" id="nbell" type="button" aria-label="מה חדש בגרסה הזו" aria-expanded="false" aria-controls="npanel"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bd" id="nbd" hidden></span></button></div>
+  <button class="go" id="refresh">רענן</button>
+</div></header>
+
+<main>
+  <p class="status"><span class="ring" id="ring"></span><span id="status">טוען…</span></p>
+  <div id="msg"></div>
+
+  <!-- חי עכשיו -->
+  <section id="p-live" role="tabpanel" aria-labelledby="t-live">
+   <div id="home">
+    <div class="hero2" id="hero" aria-live="polite">
+      <div class="stage" id="stage">
+        <img class="bg" id="heroImg" alt="" hidden>
+        <a class="stage-link" id="heroLink" target="_blank" rel="noopener" aria-label="פתח את השידור"></a>
+        <span class="vw" id="heroVw"></span>
+        <button class="herotb" id="heroTb" type="button" aria-label="שנה טאמבנייל"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>טאמבנייל</button>
+        <div class="cap">
+          <span id="heroAv"></span>
+          <div class="txt"><div class="nm" id="heroName">–</div><div class="tt" id="heroTitle"></div><div class="tags" id="heroTags"></div></div>
+          <a class="watch" id="heroWatch" target="_blank" rel="noopener">צפה עכשיו</a>
+        </div>
+        <div class="dots" id="heroDots"></div>
+        <div class="arrows"><button class="pv" id="heroPrev" type="button" aria-label="הקודם"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button><button class="nx" id="heroNext" type="button" aria-label="הבא"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+      </div>
+      <aside class="feed" aria-label="פעילות בלייב"><div class="feed-in">
+        <h3><span class="dot" style="margin:0"></span>פעילות בלייב</h3>
+        <div class="feed-body" id="feedBody"></div>
+        <div class="pin" id="feedPin" hidden></div>
+      </div></aside>
+    </div>
+
+    <button class="promo" id="strip" type="button" aria-label="לספירה לאחור של הסאבתון">
+      <img src="data:image/jpeg;base64,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" alt="">
+      <span><span class="pt">הסאבתון של עודד · GTA 6</span><br><span class="pc" id="stripT">–</span></span>
+      <span class="cta">לפרטים</span>
+    </button>
+    <div class="statline">
+      <span class="dot" style="margin:0"></span>
+      <span><b id="count">–</b> ערוצים בלייב</span><i class="sep"></i>
+      <span><b id="viewers">–</b> צופים</span><i class="sep"></i>
+      <span><b id="games">–</b> משחקים</span>
+      <span id="usersPill" hidden><i class="sep" style="display:inline-block;vertical-align:middle;margin-inline-end:12px"></i><b id="usersN">–</b> נכנסו עם Google</span>
+    </div>
+
+    <section class="sec"><h2 class="h2">סטרימים <b>בשבילך</b></h2><div id="forYou"></div></section>
+    <section class="sec"><h2 class="h2">קטגוריות <b>חמות</b></h2><div id="cats"></div><button class="more" id="catMore" type="button" hidden>הצג עוד</button></section>
+    <section class="sec"><h2 class="h2">לוחות <b>מובילים</b></h2><div class="lbs" id="lbs"></div></section>
+
+    <div class="box gta" id="gta" aria-live="polite">
+      <h2>GTA 6 <span id="gtaTag">בודק…</span></h2>
+      <p id="gtaNote"></p>
+      <ul class="list" id="gtaPlay"></ul>
+      <p class="subh" id="gtaMentionH" hidden style="margin-top:12px">מזכירים GTA 6 בכותרת (לא בהכרח משחקים)</p>
+      <ul class="list" id="gtaMention" style="margin-top:0"></ul>
+    </div>
+
+    <div id="catRows"></div>
+    <button class="more" id="allBtn" type="button" hidden>לכל השידורים</button>
+    <details>
+      <summary>הדבקת JSON ידנית (אם הטעינה נכשלת)</summary>
+      <textarea id="manual" placeholder="הדבק כאן JSON של livestreams"></textarea>
+      <button class="go" id="useManual" style="margin-top:8px">השתמש ב-JSON</button>
+    </details>
+   </div>
+
+   <div id="browse" hidden>
+    <div class="tools">
+      <h2 id="browseTitle">כל השידורים</h2>
+      <select id="sort" aria-label="מיון">
+        <option value="v">מיון: צופים</option>
+        <option value="n">מיון: שם</option>
+        <option value="g">מיון: משחק</option>
+        <option value="s">מיון: הכי חדש</option>
+      </select>
+      <button class="ghost" id="backHome" type="button">חזרה לדף הבית</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="סינון לפי משחק"></div>
+    <div class="grid" id="grid"></div>
+   </div>
+  </section>
+
+  <!-- המעקב שלי -->
+  <section id="p-follow" role="tabpanel" aria-labelledby="t-follow" hidden>
+    <div class="box">
+      <h2>התראה כשסטרימר <span>עולה לשידור</span></h2>
+      <p>סמן כוכב על סטרימר בכרטיס, או הוסף לפי שם הערוץ. כשהוא יעלה לשידור תופיע התראה.</p>
+      <div class="add">
+        <input type="text" id="addIn" dir="ltr" placeholder="שם הערוץ, למשל name או kick.com/name" aria-label="שם ערוץ להוספה">
+        <button class="go" id="addBtn">הוסף למעקב</button>
+      </div>
+      <p style="margin-top:12px" id="permNote"></p>
+      <button class="go" id="permBtn" style="margin-top:8px" hidden>הפעל התראות בדפדפן</button>
+      <p style="margin-top:12px;font-size:13px">ההתראות עובדות כל עוד הדף פתוח בדפדפן, ונבדקות פעם בדקה.</p>
+    </div>
+    <div class="box">
+      <h2>בעקבות <span id="followCount"></span></h2>
+      <ul class="list" id="followList"></ul>
+    </div>
+  </section>
+
+  <!-- היו בלייב -->
+  <section id="p-stats" role="tabpanel" aria-labelledby="t-stats" hidden>
+    <div class="box">
+      <h2>כמה סטרימרים <span>היו בלייב</span></h2>
+      <p>ב-24 השעות האחרונות, לפי מה שהדף מדד. <span id="stSince"></span></p>
+      <div class="stats2">
+        <div class="st"><b id="stNow">–</b><span>בלייב עכשיו</span></div>
+        <div class="st"><b id="stPeak">–</b><span>שיא בו-זמנית <span id="stPeakT"></span></span></div>
+        <div class="st"><b id="stUniq">–</b><span>סטרימרים שהיו בלייב</span></div>
+        <div class="st"><b id="stViews">–</b><span>שיא צופים כולל</span></div>
+        <div class="st" id="stUsersBox" hidden><b id="stUsers">–</b><span>משתמשים שנכנסו עם Google</span></div>
+      </div>
+      <div class="chart" id="chart" role="img" aria-label="גרף מספר הסטרימרים בלייב לאורך 24 השעות האחרונות"></div>
+      <p style="margin-top:10px;font-size:13px">הנתונים נשמרים בדפדפן הזה ונאספים רק כשהדף פתוח, ולכן הם מתחילים מהרגע הראשון שפתחת אותו.</p>
+    </div>
+    <div class="box">
+      <h2>זמן שידור <span>יומי</span></h2>
+      <p>כמה זמן כל סטרימר היה בשידור בכל יום, לפי שעון ישראל. משך השידור הנוכחי מגיע ישירות מ-Kick. הימים הקודמים נשמרים בדפדפן הזה, ורק מהרגע שפתחת את הדף.</p>
+      <div class="dtab" id="dayTab"></div>
+    </div>
+    <div class="box">
+      <h2>מי היה <span>בלייב</span></h2>
+      <ul class="list" id="seenList"></ul>
+    </div>
+  </section>
+
+  <!-- מה חדש -->
+  <section id="p-new" role="tabpanel" aria-labelledby="t-new" hidden>
+    <div class="box">
+      <h2>עלו לשידור <span>ממש עכשיו</span></h2>
+      <p>סטרימרים שהתחילו לשדר בשעה האחרונה</p>
+      <ul class="list" id="justLive"></ul>
+    </div>
+    <div class="box">
+      <h2>מה חדש <span>באתר</span></h2>
+      <ul class="list" id="changelog"></ul>
+    </div>
+  </section>
+
+  <!-- בקרוב -->
+  <section id="p-soon" role="tabpanel" aria-labelledby="t-soon" hidden>
+    <div class="sub" aria-label="ספירה לאחור לסאבתון של עודד">
+      <img src="data:image/jpeg;base64,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" alt="עודד">
+      <h2>הסאבתון של עודד</h2>
+      <div class="badge" dir="ltr">GTA 6</div>
+      <div class="date">19.11 · יום חמישי</div>
+      <div class="cd" aria-live="off">
+        <div><b id="sbD">–</b><span>ימים</span></div>
+        <div><b id="sbH">–</b><span>שעות</span></div>
+        <div><b id="sbM">–</b><span>דקות</span></div>
+        <div><b id="sbS">–</b><span>שניות</span></div>
+      </div>
+      <div class="done" id="sbDone" hidden>הסאבתון החל!</div>
+      <p class="note" id="sbNote"></p>
+      <div class="gtac" aria-live="polite"><b id="sbGta">–</b>סטרימרים ישראלים משחקים GTA 6 עכשיו</div>
+      <div class="who" id="sbWho"></div>
+    </div>
+    <div class="box gta" style="margin-top:0">
+      <h2>GTA 6 יוצא <span>ב-19.11.2026</span></h2>
+      <p id="cdNote">הספירה לאחור עד היציאה, לפי המועד שפרסמה Rockstar</p>
+      <div class="cd" id="cd" aria-live="off">
+        <div><b id="cdD">–</b><span>ימים</span></div>
+        <div><b id="cdH">–</b><span>שעות</span></div>
+        <div><b id="cdM">–</b><span>דקות</span></div>
+        <div><b id="cdS">–</b><span>שניות</span></div>
+      </div>
+    </div>
+    <div class="box">
+      <h2>בתכנון <span>לאתר</span></h2>
+      <p>רעיונות שעוד לא נבנו</p>
+      <ul class="list" id="roadmap"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="kf"><div class="kf-in">
+  <div><div class="lg">ISRAEL LIVE</div><p>אתר לא רשמי שמראה מי מהסטרימרים הישראלים משדר עכשיו בקיק. הנתונים מה-API הציבורי של Kick.</p></div>
+  <div><h4>האתר</h4><ul>
+    <li><button type="button" data-go="live">חי עכשיו</button></li>
+    <li><button type="button" data-go="follow">המעקב שלי</button></li>
+    <li><button type="button" data-go="stats">היו בלייב</button></li>
+    <li><button type="button" data-go="new">מה חדש</button></li>
+    <li><button type="button" data-go="soon">בקרוב</button></li>
+  </ul></div>
+  <div><h4>משאבים</h4><ul>
+    <li><a href="https://kick.com" target="_blank" rel="noopener">Kick</a></li>
+    <li><a href="https://help.kick.com" target="_blank" rel="noopener">עזרה ותמיכה</a></li>
+    <li><a href="https://docs.kick.com" target="_blank" rel="noopener">Kick Developer</a></li>
+  </ul></div>
+  <div><h4>משפטי</h4><ul>
+    <li><a href="https://kick.com/community-guidelines" target="_blank" rel="noopener">Community Guidelines</a></li>
+    <li><a href="https://kick.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></li>
+    <li><a href="https://kick.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></li>
+  </ul></div>
+</div></footer>
+<audio id="bgm" src="music/radio.mp3" loop preload="none"></audio>
+<div class="npanel" id="npanel" role="dialog" aria-label="מה חדש בגרסה הזו" hidden></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+
+const REFRESH_MS = 60000;
+const GTA_RELEASE = new Date('2026-11-19T00:00:00+02:00');
+// ערוך כאן את התוכן של "מה חדש" ו"בקרוב"
+const VERSION = '1.5';
+const CHANGELOG = [
+  ['זמן שידור: על כל כרטיס מוצג כמה זמן הסטרימר כבר בשידור, ובלשונית "היו בלייב" יש טבלת זמן שידור יומי (היום, אתמול, ממוצע ו-7 ימים)', 'חדש'],
+  ['שעון בשורה העליונה, לפי שעון ישראל', 'חדש'],
+  ['טאמבנילים מותאמים ללייבים: מעלים תמונה או קישור מכפתור התמונה בכרטיס (אצלי בלבד, או לכולם עם מפתח מנהל)', 'חדש'],
+  ['עיצוב מעודכן: כרטיסים שעולים בריחוף, קו ירוק מתחת לכותרת וצל לפס הסטטיסטיקה', 'עודכן'],
+  ['מוזיקת רקע באתר, עם כפתור הפעלה והשתקה ועוצמת קול (נשמר בדפדפן)', 'חדש'],
+  ['ההודעה הרשמית בראש האתר הוסרה', 'עודכן'],
+  ['פעמון "מה חדש בגרסה הזו" בשורה העליונה, עם נקודה שמסמנת שיש עדכון שעוד לא ראית', 'חדש'],
+  ['סמן עכבר מעודכן: חץ חלק עם צל, ויד ירוקה כשאפשר ללחוץ', 'חדש'],
+  ['הודעה רשמית בראש האתר', 'חדש'],
+  ['ספירת ימי הסאבתון של ODEDSVR: באיזה יום הוא, וכמה זמן הוא בשידור', 'חדש'],
+  ['עיצוב חדש בסגנון דף הבית של קיק: שידור מומלץ, סטרימים וקטגוריות, לוחות מובילים ושורות לפי משחק', 'חדש'],
+  ['סמן עכבר חדש: חץ גדול וברור, ויד כשאפשר ללחוץ (במקום חץ בכל מקום)', 'חדש'],
+  ['החיפוש עבר לשורת הניווט העליונה', 'חדש'],
+  ['התחברות עם חשבון Google, ומונה של כמה משתמשים נכנסו לאתר', 'חדש'],
+  ['עיצוב חדש בסגנון GTA 6: שקיעה, דקלים וניאון ורוד-כתום', 'חדש'],
+  ['לשונית "היו בלייב": כמה סטרימרים היו בלייב ב-24 שעות, שיא בו-זמנית וגרף', 'חדש'],
+  ['ספירה לאחור לסאבתון של עודד (GTA 6, 19.11), בלשונית "בקרוב" ובפס בראש הדף', 'חדש'],
+  ['עיצוב חדש בסגנון קיק: כרטיסים עם תמונת שידור, מספר צופים ותג LIVE', 'חדש'],
+  ['מוצג איזה משחק כל סטרימר משדר, עם סינון לפי משחק', 'חדש'],
+  ['קטע GTA 6: מי משחק בו עכשיו ומי מזכיר אותו בכותרת', 'חדש'],
+  ['לשונית "מה חדש": מי עלה לשידור בשעה האחרונה', 'חדש'],
+  ['התראה כשסטרימר מסוים עולה לשידור, עם כוכב בכל כרטיס ולשונית "המעקב שלי"', 'חדש']
+];
+const ROADMAP = [
+  'שמירת היסטוריה בשרת, גם כשהדף סגור',
+  'מעקב אחרי משחקים נוספים מלבד GTA 6'
+];
+
+const $ = id => document.getElementById(id);
+let streams = [], timer = null, tick = null, last = 0, gameFilter = '';
+
+async function getJSON(url) {
+  const r = await fetch(url, {cache: 'no-store'});
+  const t = await r.text();
+  if (!r.ok) {
+    let m = ''; try { m = JSON.parse(t).error || ''; } catch (_) {}
+    throw new Error('HTTP ' + r.status + (m ? ' ' + m : ''));
+  }
+  return JSON.parse(t);
+}
+function listOf(j) {
+  if (Array.isArray(j)) return j;
+  for (const k of ['data', 'livestreams', 'streams', 'items']) if (j && Array.isArray(j[k])) return j[k];
+  if (j && j.data && Array.isArray(j.data.livestreams)) return j.data.livestreams;
+  return [];
+}
+function normalize(s) {
+  const ch = s.channel || {};
+  const cat = s.category || (Array.isArray(s.categories) && s.categories[0]) || {};
+  const th = s.thumbnail;
+  const slug = s.slug || ch.slug || s.channel_slug || '';
+  return {
+    slug,
+    name: ch.user?.username || ch.username || s.username || s.channel_name || slug,
+    title: s.stream_title || s.session_title || s.title || '',
+    game: cat.name || s.category_name || s.game || '',
+    thumb: typeof th === 'string' ? th : (th?.src || th?.url || ''),
+    started: Date.parse(s.started_at || s.start_time || s.created_at || '') || 0,
+    viewers: Number(s.viewer_count ?? s.viewers ?? 0) || 0,
+    avatar: s.profile_picture || ch.profile_picture || ch.user?.profile_pic || '',
+    catThumb: typeof cat.thumbnail === 'string' ? cat.thumbnail : (cat.thumbnail?.src || cat.thumbnail?.url || ''),
+    mature: !!(s.has_mature_content ?? s.is_mature),
+    lang: (s.language || s.lang || ch.language || '').toString().toLowerCase()
+  };
+}
+const HEB = /[\u0590-\u05FF]/;
+const isHeb = x => x.lang ? ['he', 'heb', 'iw', 'hebrew'].includes(x.lang) : HEB.test(x.name + ' ' + x.title);
+function dedupe(arr) {
+  const m = new Map();
+  arr.forEach(x => { if (x.slug && isHeb(x) && !m.has(x.slug)) m.set(x.slug, x); });
+  return [...m.values()];
+}
+async function loadAll() {
+  const url = location.protocol.startsWith('http') ? '/api/live' : 'http://localhost:3000/api/live';
+  return dedupe(listOf(await getJSON(url)).map(normalize));
+}
+
+const fmt = n => n.toLocaleString('he-IL');
+function since(t) {
+  if (!t) return '';
+  const m = Math.max(0, Math.floor((Date.now() - t) / 60000));
+  return Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0') + ' שעות';
+}
+const link = s => 'https://kick.com/' + encodeURIComponent(s.slug);
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+/* ---------- התחברות עם Google ---------- */
+const API = location.protocol.startsWith('http') ? '' : 'http://localhost:3000';
+async function apiJSON(path) {
+  const r = await fetch(API + path, {cache: 'no-store', credentials: 'same-origin'});
+  if (!r.ok || !(r.headers.get('content-type') || '').includes('json')) throw new Error('no api');
+  return r.json();
+}
+let gsi = null;
+function loadGsi() {
+  if (window.google && google.accounts && google.accounts.id) return Promise.resolve();
+  return gsi || (gsi = new Promise((ok, no) => {
+    const sc = document.createElement('script');
+    sc.src = 'https://accounts.google.com/gsi/client'; sc.async = true; sc.onload = ok; sc.onerror = no;
+    document.head.append(sc);
+  }));
+}
+function toastMsg(text) {
+  const t = el('div', 'toast'); t.append(el('div', '', text));
+  const x = el('button', 'ghost', 'סגור'); x.type = 'button'; x.onclick = () => t.remove();
+  t.append(x); $('toasts').append(t); setTimeout(() => t.remove(), 12000);
+}
+async function onGoogle(resp) {
+  try {
+    const r = await fetch(API + '/api/auth/google', {method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({credential: resp.credential})});
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'HTTP ' + r.status);
+    await loadAccount(); loadUsers(); toastMsg('התחברת בהצלחה');
+  } catch (e) { toastMsg('ההתחברות עם Google נכשלה (' + e.message + ').'); }
+}
+async function loadAccount() {
+  const box = $('acct'); box.replaceChildren();
+  let j;
+  try { j = await apiJSON('/api/me'); } catch (_) { return; }
+  if (j.user) {
+    const me = j.user, d = el('div', 'me');
+    if (me.pic) { const im = el('img'); im.alt = ''; im.referrerPolicy = 'no-referrer'; im.src = me.pic; im.onerror = () => im.replaceWith(el('span', 'av')); d.append(im); } else d.append(el('span', 'av'));
+    const out = el('a', '', 'התנתק'); out.href = '/api/auth/logout';
+    out.onclick = () => { try { google.accounts.id.disableAutoSelect(); } catch (_) {} };
+    d.append(el('span', '', me.name), out); box.append(d);
+  } else if (j.googleClientId) {
+    const holder = el('div'); box.append(holder);
+    try {
+      await loadGsi();
+      google.accounts.id.initialize({client_id: j.googleClientId, callback: onGoogle});
+      google.accounts.id.renderButton(holder, {theme: 'filled_black', size: 'medium', shape: 'pill', text: 'signin_with', locale: 'he'});
+    } catch (_) { holder.remove(); }
+  }
+}
+async function loadUsers() {
+  try {
+    const j = await apiJSON('/api/stats');
+    if (typeof j.users !== 'number') return;
+    $('usersN').textContent = fmt(j.users); $('usersPill').hidden = false;
+    $('stUsers').textContent = fmt(j.users); $('stUsersBox').hidden = false;
+  } catch (_) {}
+}
+
+/* ---------- היסטוריה: כמה היו בלייב ---------- */
+const HKEY = 'kickil_hist', DAY = 24 * 3600e3;
+let hist = {samples: [], seen: {}, sess: {}, names: {}};
+try { const h = JSON.parse(localStorage.getItem(HKEY) || 'null'); if (h && Array.isArray(h.samples) && h.seen) hist = h; } catch (_) {}
+function record(list) {
+  const t = Date.now();
+  hist.samples.push([t, list.length, list.reduce((a, s) => a + s.viewers, 0)]);
+  hist.samples = hist.samples.filter(x => x[0] >= t - 2 * DAY).slice(-3000);
+  list.forEach(s => {
+    const o = hist.seen[s.slug] || {first: t, peak: 0};
+    o.name = s.name; o.game = s.game; o.last = t; o.peak = Math.max(o.peak, s.viewers);
+    hist.seen[s.slug] = o;
+  });
+  Object.keys(hist.seen).forEach(k => { if (hist.seen[k].last < t - DAY) delete hist.seen[k]; });
+  hist.sess = hist.sess || {}; hist.names = hist.names || {};
+  list.forEach(s => {
+    hist.names[s.slug] = s.name;
+    if (!s.started) return;
+    const arr = hist.sess[s.slug] || (hist.sess[s.slug] = []);
+    const f = arr.find(x => Math.abs(x[0] - s.started) < 120000);
+    if (f) f[1] = t; else arr.push([s.started, t]);
+  });
+  Object.keys(hist.sess).forEach(k => {
+    hist.sess[k] = hist.sess[k].filter(x => x[1] >= t - 8 * DAY).slice(-40);
+    if (!hist.sess[k].length) { delete hist.sess[k]; delete hist.names[k]; }
+  });
+  try { localStorage.setItem(HKEY, JSON.stringify(hist)); } catch (_) {}
+}
+const fmtDur = ms => { const m = Math.max(0, Math.round(ms / 60000)); return m < 60 ? m + ' ד׳' : Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0') + ' ש׳'; };
+const jerParts = t => { const o = {}; new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Jerusalem', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23'}).formatToParts(t).forEach(x => o[x.type] = +x.value); return o; };
+function dayStart(t) { // חצות לפי שעון ישראל, באלפיות שנייה
+  const p = jerParts(t), off = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - Math.floor(t / 1000) * 1000;
+  return Date.UTC(p.year, p.month - 1, p.day) - off;
+}
+function perDay(sessions) {
+  const out = {};
+  sessions.forEach(([a, b]) => { let d = dayStart(a); while (d < b) { const nx = dayStart(d + 30 * 3600e3), ov = Math.min(b, nx) - Math.max(a, d); if (ov > 0) out[d] = (out[d] || 0) + ov; d = nx; } });
+  return out;
+}
+function renderDayTab() {
+  const box = $('dayTab'); if (!box) return;
+  const now = Date.now(); let d = dayStart(now); const days = [d];
+  for (let i = 1; i < 7; i++) { d = dayStart(d - 12 * 3600e3); days.push(d); }   // היום ... לפני 6 ימים
+  const live = new Set(streams.map(s => s.slug));
+  const rows = Object.entries(hist.sess || {}).map(([slug, ss]) => {
+    const pd = perDay(ss), v = days.map(x => pd[x] || 0), act = v.filter(x => x > 0);
+    return {slug, name: (hist.names || {})[slug] || slug, v, avg: act.length ? act.reduce((a, b) => a + b, 0) / act.length : 0, live: live.has(slug)};
+  }).filter(r => r.v.some(x => x > 0)).sort((a, b) => (b.v[0] - a.v[0]) || (b.v[1] - a.v[1])).slice(0, 40);
+  box.replaceChildren();
+  if (!rows.length) { box.append(el('div', 'empty', 'עוד אין נתוני שידור. הם יתמלאו כשסטרימרים יהיו בלייב והדף פתוח.')); return; }
+  const hd = el('div', 'dr hd'); ['סטרימר', 'היום', 'אתמול', 'ממוצע ליום', '7 ימים אחרונים'].forEach((t, i) => hd.append(el('span', i === 3 ? 'a' : '', t))); box.append(hd);
+  const mx = Math.max(...rows.flatMap(r => r.v), 1);
+  rows.forEach(r => {
+    const row = el('div', 'dr'), nm = el('a'); nm.href = 'https://kick.com/' + encodeURIComponent(r.slug); nm.target = '_blank'; nm.rel = 'noopener';
+    if (r.live) nm.append(el('span', 'lv')); nm.append(r.name);
+    const c = (ms, cls) => el('span', 'n ' + (cls || ''), ms ? fmtDur(ms) : '–');
+    const bars = el('span', 'bars'); bars.setAttribute('aria-hidden', 'true');
+    r.v.slice().reverse().forEach((ms, i) => { const b = el('i', ms ? 'on' : ''); b.style.height = Math.max(8, ms / mx * 100) + '%'; b.title = new Date(days[6 - i] + 12 * 3600e3).toLocaleDateString('he-IL', {weekday: 'short', day: 'numeric', month: 'numeric', timeZone: 'Asia/Jerusalem'}) + ': ' + (ms ? fmtDur(ms) : 'לא שידר'); bars.append(b); });
+    const av = c(r.avg); av.classList.add('a');
+    row.append(nm, c(r.v[0], 't'), c(r.v[1]), av, bars); box.append(row);
+  });
+}
+const NS = 'http://www.w3.org/2000/svg';
+function sv(tag, a, text) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (text != null) e.textContent = text; return e; }
+const hhmm = t => new Date(t).toLocaleTimeString('he-IL', {hour: '2-digit', minute: '2-digit'});
+function ago(t) { const m = Math.round((Date.now() - t) / 60000); return m < 1 ? 'לפני רגע' : m < 60 ? 'לפני ' + m + ' דקות' : 'לפני ' + Math.floor(m / 60) + ' שעות'; }
+function renderStats() {
+  const now = Date.now(), sm = hist.samples.filter(x => x[0] >= now - DAY);
+  const box = $('chart'); box.replaceChildren();
+  if (!sm.length) { box.append(el('p', '', 'עוד אין נתונים')); return; }
+  const peak = sm.reduce((m, x) => x[1] > m[1] ? x : m, sm[0]);
+  const peakV = Math.max(...sm.map(x => x[2]));
+  $('stNow').textContent = fmt(streams.length);
+  $('stPeak').textContent = fmt(peak[1]); $('stPeakT').textContent = '(' + hhmm(peak[0]) + ')';
+  $('stViews').textContent = fmt(peakV);
+  $('stUniq').textContent = fmt(Object.keys(hist.seen).length);
+  $('stSince').textContent = 'מדידה מאז ' + new Date(sm[0][0]).toLocaleString('he-IL', {day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit'}) + '.';
+  const W = 800, H = 220, L = 38, R = 12, T = 14, B = 26;
+  const t0 = sm[0][0], t1 = Math.max(now, sm[sm.length - 1][0]), span = Math.max(t1 - t0, 60000);
+  const maxY = Math.max(4, Math.ceil(peak[1] / 4) * 4);
+  const X = t => L + (t - t0) / span * (W - L - R), Y = v => H - B - v / maxY * (H - T - B);
+  const svg = sv('svg', {viewBox: '0 0 ' + W + ' ' + H});
+  const defs = sv('defs', {}); const g = sv('linearGradient', {id: 'ag', x1: 0, y1: 0, x2: 0, y2: 1});
+  g.append(sv('stop', {offset: 0, 'stop-color': '#53fc18', 'stop-opacity': .55}), sv('stop', {offset: 1, 'stop-color': '#53fc18', 'stop-opacity': .04}));
+  defs.append(g); svg.append(defs);
+  [0, .5, 1].forEach(f => {
+    const y = Y(maxY * f);
+    svg.append(sv('line', {x1: L, x2: W - R, y1: y, y2: y, stroke: '#2a2e33', 'stroke-dasharray': f ? '3 4' : ''}), sv('text', {x: L - 6, y: y + 4, 'text-anchor': 'end'}, Math.round(maxY * f)));
+  });
+  svg.append(sv('text', {x: L, y: H - 6}, hhmm(t0)), sv('text', {x: W - R, y: H - 6, 'text-anchor': 'end'}, 'עכשיו'));
+  const segs = []; let cur = [];
+  sm.forEach((x, i) => { if (i && x[0] - sm[i - 1][0] > 210000) { segs.push(cur); cur = []; } cur.push(x); });
+  segs.push(cur);
+  segs.forEach(sg => {
+    if (sg.length < 2) { svg.append(sv('circle', {cx: X(sg[0][0]), cy: Y(sg[0][1]), r: 3, fill: '#53fc18'})); return; }
+    const line = sg.map((x, i) => (i ? 'L' : 'M') + X(x[0]).toFixed(1) + ' ' + Y(x[1]).toFixed(1)).join(' ');
+    svg.append(sv('path', {d: line + ' L' + X(sg[sg.length - 1][0]).toFixed(1) + ' ' + Y(0) + ' L' + X(sg[0][0]).toFixed(1) + ' ' + Y(0) + ' Z', fill: 'url(#ag)'}),
+               sv('path', {d: line, fill: 'none', stroke: '#53fc18', 'stroke-width': 2.5, 'stroke-linejoin': 'round'}));
+  });
+  box.append(svg);
+  const liveNow = new Set(streams.map(s => s.slug));
+  const rows = Object.entries(hist.seen).sort((a, b) => (liveNow.has(b[0]) - liveNow.has(a[0])) || b[1].last - a[1].last);
+  const ul = $('seenList'); ul.replaceChildren();
+  if (!rows.length) ul.append(el('li', '', 'עוד אין סטרימרים ברשימה'));
+  rows.forEach(([slug, o]) => {
+    const li = el('li'); const a = el('a', '', o.name || slug); a.href = link({slug}); a.target = '_blank'; a.rel = 'noopener';
+    const live = liveNow.has(slug);
+    li.append(a, el('span', live ? 'on' : 'm', (live ? 'בלייב עכשיו' : 'היה בלייב ' + ago(o.last)) + (o.game ? ' · ' + o.game : '') + ' · שיא ' + fmt(o.peak) + ' צופים'));
+    ul.append(li);
+  });
+}
+
+/* ---------- מעקב והתראות ---------- */
+const FKEY = 'kickil_follow';
+let follows = [], prevLive = null;
+try { follows = JSON.parse(localStorage.getItem(FKEY) || '[]'); if (!Array.isArray(follows)) follows = []; } catch (_) { follows = []; }
+const saveFollows = () => { try { localStorage.setItem(FKEY, JSON.stringify(follows)); } catch (_) {} };
+const isFollowed = slug => follows.some(f => f.slug === slug);
+function cleanSlug(v) {
+  return v.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^(www\.)?kick\.com\//, '').split(/[/?#]/)[0].replace(/\s+/g, '-');
+}
+function toggleFollow(slug, name) {
+  const i = follows.findIndex(f => f.slug === slug);
+  if (i >= 0) follows.splice(i, 1); else follows.push({slug, name: name || slug});
+  saveFollows(); renderFollow(); updateBells();
+}
+function updateBells() {
+  document.querySelectorAll('.bell').forEach(b => {
+    const on = isFollowed(b.dataset.slug);
+    b.setAttribute('aria-pressed', String(on));
+    b.textContent = on ? '★' : '☆';
+    b.title = on ? 'הסר ממעקב' : 'התראה כשעולה לשידור';
+  });
+}
+function renderFollow() {
+  const byLive = new Map(streams.map(s => [s.slug, s]));
+  const rows = follows.map(f => ({f, s: byLive.get(f.slug)})).sort((a, b) => (!!b.s - !!a.s) || a.f.name.localeCompare(b.f.name, 'he'));
+  const ul = $('followList'); ul.replaceChildren();
+  if (!rows.length) ul.append(el('li', '', 'עדיין לא עוקב אחרי אף אחד. לחץ על הכוכב בכרטיס של סטרימר כדי להתחיל.'));
+  rows.forEach(({f, s}) => {
+    const li = el('li');
+    const a = el('a', '', s ? s.name : f.name); a.href = link({slug: f.slug}); a.target = '_blank'; a.rel = 'noopener';
+    const st = el('span', s ? 'on' : 'm', s ? 'משדר עכשיו' + (s.game ? ' · ' + s.game : '') + ' · ' + fmt(s.viewers) + ' צופים' : 'לא משדר כרגע');
+    const rm = el('button', 'ghost', 'הסר'); rm.type = 'button'; rm.onclick = () => toggleFollow(f.slug);
+    const left = el('div'); left.append(a, el('br'), st);
+    li.append(left, rm); ul.append(li);
+  });
+  const liveN = rows.filter(r => r.s).length;
+  $('followCount').textContent = follows.length ? follows.length + ' ערוצים' : '';
+  const n = $('followN'); n.hidden = !liveN; n.textContent = liveN;
+}
+function toast(s) {
+  const t = el('div', 'toast');
+  const box = el('div'); const a = el('a', '', s.name + ' עלה לשידור'); a.href = link(s); a.target = '_blank'; a.rel = 'noopener';
+  const sm = el('small', '', (s.game ? s.game + ' · ' : '') + s.title); box.append(a, sm);
+  const x = el('button', 'ghost', 'סגור'); x.type = 'button'; x.onclick = () => t.remove();
+  t.append(box, x); $('toasts').append(t); setTimeout(() => t.remove(), 15000);
+}
+function notifyLive(s) {
+  toast(s);
+  try {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      const n = new Notification(s.name + ' עלה לשידור', {body: (s.game ? s.game + ' · ' : '') + s.title, icon: s.thumb || undefined, tag: 'live-' + s.slug});
+      n.onclick = () => { window.open(link(s), '_blank'); n.close(); };
+    }
+  } catch (_) {}
+}
+function checkFollows(list) {
+  const now = new Set(list.map(s => s.slug));
+  if (prevLive) follows.forEach(f => { if (now.has(f.slug) && !prevLive.has(f.slug)) notifyLive(list.find(s => s.slug === f.slug)); });
+  prevLive = now;
+}
+function renderPerm() {
+  const note = $('permNote'), btn = $('permBtn');
+  btn.hidden = true;
+  if (!('Notification' in window)) { note.textContent = 'הדפדפן הזה לא תומך בהתראות. תופיע הודעה בתוך הדף בלבד.'; return; }
+  if (Notification.permission === 'granted') { note.textContent = 'התראות דפדפן פעילות.'; note.className = 'on'; }
+  else if (Notification.permission === 'denied') { note.textContent = 'התראות דפדפן חסומות. אפשר לאפשר אותן בהגדרות האתר בדפדפן. בינתיים תופיע הודעה בתוך הדף.'; }
+  else { note.textContent = 'כדי לקבל התראות גם כשהדף ברקע, צריך לאשר אותן בדפדפן.'; btn.hidden = false; }
+}
+
+/* ---------- חי עכשיו (דף הבית בסגנון קיק) ---------- */
+let browseAll = false, heroList = [], heroIdx = 0, heroTimer = null;
+const hue = str => { let h = 0; for (const c of String(str)) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const initial = n => (String(n).trim()[0] || '?').toUpperCase();
+function avEl(s) {
+  const mk = () => { const d = el('span', 'avl', initial(s.name)); d.style.background = 'hsl(' + hue(s.slug) + ' 70% 60%)'; return d; };
+  if (!s.avatar) return mk();
+  const im = el('img', 'av'); im.alt = ''; im.loading = 'lazy'; im.referrerPolicy = 'no-referrer'; im.src = s.avatar;
+  im.onerror = () => im.replaceWith(mk());
+  return im;
+}
+const chevron = () => { const s = sv('svg', {viewBox: '0 0 24 24'}); s.append(sv('path', {d: 'M9 5l7 7-7 7'})); return s; };
+function mkRail(row) {
+  const w = el('div', 'railwrap');
+  const mkBtn = cls => { const b = el('button', 'rail-btn ' + cls); b.type = 'button'; b.hidden = true; b.setAttribute('aria-label', cls === 'next' ? 'הבא' : 'הקודם'); b.append(chevron()); return b; };
+  const nx = mkBtn('next'), pv = mkBtn('prev');
+  w.append(row, pv, nx);
+  const upd = () => {
+    const max = row.scrollWidth - row.clientWidth, pos = Math.abs(row.scrollLeft);
+    pv.hidden = pos < 4 || row.classList.contains('expanded');
+    nx.hidden = max < 4 || pos > max - 4 || row.classList.contains('expanded');
+  };
+  row.addEventListener('scroll', upd, {passive: true});
+  nx.onclick = () => row.scrollBy({left: -row.clientWidth * .9, behavior: 'smooth'});
+  pv.onclick = () => row.scrollBy({left: row.clientWidth * .9, behavior: 'smooth'});
+  if (window.ResizeObserver) new ResizeObserver(upd).observe(row);
+  requestAnimationFrame(upd); setTimeout(upd, 300);
+  w.upd = upd;
+  return w;
+}
+function skeleton(box, n, tall) {
+  const row = el('div', 'row' + (tall ? ' c9' : ''));
+  for (let i = 0; i < n; i++) row.append(el('div', 'sk' + (tall ? ' tall' : '')));
+  box.replaceChildren(row);
+}
+
+/* ---------- טאמבנילים מותאמים ---------- */
+const TK = 'kickil_thumbs', TKEY = 'kickil_thumbs_key';
+let localThumbs = {}, sharedThumbs = {}, thumbsCanWrite = false, thumbsAvail = false;
+try { localThumbs = JSON.parse(localStorage.getItem(TK) || '{}') || {}; } catch (_) {}
+function saveLocalThumbs() { try { localStorage.setItem(TK, JSON.stringify(localThumbs)); return true; } catch (_) { toastMsg('אין מספיק מקום לשמור את התמונה בדפדפן'); return false; } }
+function thumbOf(s) {
+  const sh = sharedThumbs[s.slug];
+  return localThumbs[s.slug] || (sh ? (sh.url || '/api/thumb?slug=' + encodeURIComponent(s.slug) + '&v=' + sh.v) : '') || s.thumb || '';
+}
+async function loadThumbs() {
+  try {
+    const r = await fetch('/api/thumbs', {cache: 'no-store'});
+    if (!r.ok) { thumbsAvail = false; return; }
+    const j = await r.json(); thumbsAvail = true; sharedThumbs = j.thumbs || {}; thumbsCanWrite = !!j.canWrite;
+  } catch (_) {}
+}
+function fileToThumb(file) {
+  return new Promise((ok, bad) => {
+    const fr = new FileReader(); fr.onerror = bad;
+    fr.onload = () => {
+      const im = new Image(); im.onerror = bad;
+      im.onload = () => {
+        const W = 640, H = 360, c = document.createElement('canvas'); c.width = W; c.height = H;
+        const k = Math.max(W / im.width, H / im.height), w = im.width * k, h = im.height * k;
+        c.getContext('2d').drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
+        ok(c.toDataURL('image/jpeg', .82));
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+const imgIcon = () => { const i = sv('svg', {viewBox: '0 0 24 24'}); i.append(sv('rect', {x: 3, y: 4, width: 18, height: 16, rx: 2}), sv('circle', {cx: 9, cy: 10, r: 1.8}), sv('path', {d: 'M21 16l-5-5-8 9'})); return i; };
+function openThumbEditor(s) {
+  const old = $('tmodal'); if (old) old.remove();
+  const ov = el('div', 'modal'); ov.id = 'tmodal';
+  const box = el('div', 'mbox'); box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'טאמבנייל של ' + s.name);
+  const h = el('h3'); h.append('טאמבנייל של ', el('span', '', s.name));
+  const prev = el('div', 'mprev'); const pim = el('img'); pim.alt = ''; pim.referrerPolicy = 'no-referrer';
+  const ph = el('span', '', 'אין תמונה'); prev.append(ph, pim);
+  let pending = '';
+  const setPrev = u => { pim.hidden = !u; ph.hidden = !!u; if (u) pim.src = u; };
+  pim.onerror = () => { pim.hidden = true; ph.hidden = false; ph.textContent = 'לא הצלחתי לטעון את התמונה'; };
+  setPrev(thumbOf(s));
+  const file = el('input'); file.type = 'file'; file.accept = 'image/*'; file.setAttribute('aria-label', 'העלאת תמונה');
+  const url = el('input'); url.type = 'text'; url.dir = 'ltr'; url.placeholder = 'או הדבק קישור לתמונה (https://...)';
+  file.onchange = async () => { if (!file.files[0]) return; try { pending = await fileToThumb(file.files[0]); url.value = ''; setPrev(pending); } catch (_) { toastMsg('לא הצלחתי לקרוא את התמונה'); } };
+  url.oninput = () => { const v = url.value.trim(); pending = /^https:\/\/\S{3,500}$/i.test(v) ? v : ''; if (pending) setPrev(pending); };
+  const key = el('input'); key.type = 'password'; key.dir = 'ltr'; key.autocomplete = 'off'; key.placeholder = 'מפתח מנהל (לשמירה לכולם)';
+  try { key.value = localStorage.getItem(TKEY) || ''; } catch (_) {}
+  const note = el('small', '', !thumbsAvail
+    ? '"שמור אצלי" משנה רק בדפדפן הזה. שמירה לכולם זמינה רק כשהאתר רץ על Netlify.'
+    : thumbsCanWrite
+    ? '"שמור אצלי" משנה רק בדפדפן הזה. "שמור לכולם" מחליף את הטאמבנייל לכל המבקרים ודורש את מפתח המנהל.'
+    : '"שמור אצלי" משנה רק בדפדפן הזה. כדי לשמור לכולם צריך להגדיר משתנה סביבה THUMBS_KEY ב-Netlify.');
+  const done = () => { ov.remove(); document.removeEventListener('keydown', esc); updateView(); };
+  const esc = e => { if (e.key === 'Escape') done(); };
+  const mine = el('button', 'go', 'שמור אצלי'); mine.type = 'button';
+  mine.onclick = () => { if (!pending) return toastMsg('בחר תמונה או הדבק קישור'); localThumbs[s.slug] = pending; if (saveLocalThumbs()) done(); };
+  const post = async body => {
+    try { localStorage.setItem(TKEY, key.value); } catch (_) {}
+    let r; try { r = await fetch('/api/thumbs', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({slug: s.slug, key: key.value, ...body})}); } catch (_) { toastMsg('אין חיבור לשרת'); return false; }
+    if (r.ok) return true;
+    toastMsg(r.status === 401 ? 'מפתח מנהל שגוי' : r.status === 503 ? 'חסר THUMBS_KEY בהגדרות Netlify' : r.status === 413 ? 'התמונה גדולה מדי' : 'השמירה נכשלה');
+    return false;
+  };
+  const all = el('button', 'ghost', 'שמור לכולם'); all.type = 'button'; all.disabled = !thumbsAvail;
+  all.onclick = async () => {
+    if (!pending) return toastMsg('בחר תמונה או הדבק קישור');
+    all.disabled = true;
+    const ok = await post(pending.startsWith('data:') ? {image: pending} : {url: pending});
+    all.disabled = false;
+    if (ok) { delete localThumbs[s.slug]; saveLocalThumbs(); await loadThumbs(); toastMsg('הטאמבנייל נשמר לכולם'); done(); }
+  };
+  const reset = el('button', 'ghost', 'איפוס אצלי'); reset.type = 'button';
+  reset.onclick = () => { delete localThumbs[s.slug]; saveLocalThumbs(); done(); };
+  const row = el('div', 'mrow'); row.append(mine, all, reset);
+  if (sharedThumbs[s.slug]) {
+    const rm = el('button', 'ghost', 'הסר לכולם'); rm.type = 'button';
+    rm.onclick = async () => { if (await post({remove: true})) { await loadThumbs(); toastMsg('הטאמבנייל הוסר'); done(); } };
+    row.append(rm);
+  }
+  const cl = el('button', 'ghost', 'סגור'); cl.type = 'button'; cl.onclick = done; row.append(cl);
+  box.append(h, prev, file, url, key, note, row); ov.append(box);
+  ov.addEventListener('click', e => { if (e.target === ov) done(); });
+  document.addEventListener('keydown', esc);
+  document.body.append(ov);
+}
+
+function card(s, i, opts) {
+  opts = opts || {};
+  const wrap = el('div', 'sc');
+  const a = el('a', 'scl'); a.href = link(s); a.target = '_blank'; a.rel = 'noopener';
+  const th = el('div', 'th');
+  const tu = thumbOf(s);
+  if (tu) { const im = el('img'); im.loading = 'lazy'; im.alt = ''; im.referrerPolicy = 'no-referrer'; im.src = tu; im.onerror = () => im.remove(); th.append(im); }
+  th.append(el('span', 'vw', fmt(s.viewers)));
+  if (s.started) { const du = el('span', 'dur', '⏱ ' + fmtDur(Date.now() - s.started)); du.title = 'משדר כבר ' + fmtDur(Date.now() - s.started); th.append(du); }
+  if (opts.rank) th.append(el('span', 'rk', '#' + (i + 1)));
+  const info = el('div', 'info');
+  const t = el('div', 'tt', s.title); t.title = s.title;
+  const nmE = el('div', 'nm', s.name); nmE.dir = 'auto'; t.dir = 'auto';
+  info.append(nmE, t);
+  if (opts.showGame && s.game) { const g = el('div', 'gm', s.game); g.dir = 'auto'; info.append(g); }
+  const tags = el('div', 'tags'); tags.append(el('span', 'tag2', 'עברית'));
+  if (s.mature) tags.append(el('span', 'tag2', '18+'));
+  if (!opts.showGame) info.append(tags);
+  const meta = el('div', 'meta'); meta.append(avEl(s), info);
+  a.append(th, meta);
+  const bell = el('button', 'bell'); bell.type = 'button'; bell.dataset.slug = s.slug;
+  bell.onclick = e => { e.preventDefault(); e.stopPropagation(); toggleFollow(s.slug, s.name); };
+  const tb = el('button', 'tbtn'); tb.type = 'button'; tb.title = 'טאמבנייל מותאם'; tb.setAttribute('aria-label', 'שנה טאמבנייל של ' + s.name); tb.append(imgIcon());
+  tb.onclick = e => { e.preventDefault(); e.stopPropagation(); openThumbEditor(s); };
+  wrap.append(a, bell, tb);
+  return wrap;
+}
+function tags2(s, box) {
+  box.replaceChildren(el('span', 'tag2', 'עברית'));
+  if (s.game) box.append(el('span', 'tag2', s.game));
+  if (s.started) box.append(el('span', 'tag2', '⏱ משדר ' + fmtDur(Date.now() - s.started)));
+  if (s.mature) box.append(el('span', 'tag2', '18+'));
+}
+
+/* גיבור */
+function renderHero() {
+  heroList = [...streams].sort((a, b) => b.viewers - a.viewers).slice(0, 8);
+  if (heroIdx >= heroList.length) heroIdx = 0;
+  const dots = $('heroDots'); dots.replaceChildren();
+  heroList.forEach((s, i) => {
+    const b = el('button'); b.type = 'button'; b.setAttribute('aria-label', 'שידור ' + (i + 1)); b.onclick = () => goHero(i); dots.append(b);
+  });
+  paintHero();
+  clearInterval(heroTimer);
+  if (heroList.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+    heroTimer = setInterval(() => { if (!$('stage').matches(':hover') && !$('p-live').hidden && !$('home').hidden) goHero(heroIdx + 1); }, 7000);
+}
+function goHero(i) { if (!heroList.length) return; heroIdx = (i + heroList.length) % heroList.length; paintHero(); }
+function paintHero() {
+  const s = heroList[heroIdx];
+  $('hero').hidden = !s;
+  if (!s) return;
+  const im = $('heroImg');
+  const hu = thumbOf(s);
+  if (hu) { im.hidden = false; im.referrerPolicy = 'no-referrer'; im.src = hu; im.onerror = () => { im.hidden = true; }; } else im.hidden = true;
+  $('heroLink').href = link(s); $('heroWatch').href = link(s);
+  $('heroVw').textContent = fmt(s.viewers);
+  $('heroName').textContent = s.name; $('heroTitle').textContent = s.title;
+  $('heroAv').replaceChildren(avEl(s));
+  tags2(s, $('heroTags'));
+  [...$('heroDots').children].forEach((b, i) => b.setAttribute('aria-current', String(i === heroIdx)));
+}
+
+/* פיד */
+function renderFeed() {
+  const body = $('feedBody'); body.replaceChildren();
+  const list = [...streams].sort((a, b) => (b.started || 0) - (a.started || 0)).slice(0, 18).reverse();
+  if (!list.length) { body.append(el('div', 'msg', 'אין כרגע שידורים בעברית')); $('feedPin').hidden = true; return; }
+  body.append(el('div', 'newline', 'שידורים אחרונים'));
+  list.forEach(s => {
+    const d = el('div', 'msg');
+    const u = el('a', 'un', s.name); u.href = link(s); u.target = '_blank'; u.rel = 'noopener'; u.style.color = 'hsl(' + hue(s.slug) + ' 85% 68%)';
+    const fresh = s.started && Date.now() - s.started < 3600000;
+    const tx = el('span', 'tx'); if (fresh) tx.append('עלה לשידור · ');
+    if (s.game) { const g = el('bdi', '', s.game); tx.append(g, ' · '); }
+    tx.append(el('bdi', '', fmt(s.viewers)), ' צופים');
+    d.append(u, tx);
+    body.append(d);
+  });
+  body.scrollTop = body.scrollHeight;
+  const top = [...streams].sort((a, b) => b.viewers - a.viewers)[0];
+  const pin = $('feedPin'); pin.hidden = false; pin.replaceChildren();
+  const a = el('a'); a.href = link(top); a.target = '_blank'; a.rel = 'noopener';
+  a.append(el('b', '', top.name), el('small', '', 'הכי צפוי עכשיו · ' + fmt(top.viewers) + ' צופים'));
+  pin.append(avEl(top), a);
+}
+
+/* שורות */
+function categories() {
+  const m = new Map();
+  streams.forEach(s => {
+    if (!s.game) return;
+    const c = m.get(s.game) || {name: s.game, viewers: 0, n: 0, thumb: '', list: []};
+    c.viewers += s.viewers; c.n++; c.list.push(s);
+    if (!c.thumb && s.catThumb) c.thumb = s.catThumb;
+    m.set(s.game, c);
+  });
+  return [...m.values()].sort((a, b) => b.viewers - a.viewers);
+}
+function openGame(name) { gameFilter = name; browseAll = false; $('q').value = ''; updateView(); scrollTo(0, 0); }
+function catTile(c) {
+  const b = el('button', 'ct'); b.type = 'button'; b.onclick = () => openGame(c.name);
+  const cv = el('div', 'cv'); cv.style.background = 'linear-gradient(160deg,hsl(' + hue(c.name) + ' 60% 38%),hsl(' + ((hue(c.name) + 50) % 360) + ' 60% 18%))';
+  const ini = el('div', 'ini', c.name.length > 14 ? initial(c.name) : c.name); cv.append(ini);
+  if (c.thumb) { const im = el('img'); im.loading = 'lazy'; im.alt = ''; im.referrerPolicy = 'no-referrer'; im.src = c.thumb; im.onload = () => ini.remove(); im.onerror = () => im.remove(); cv.append(im); }
+  cv.append(el('span', 'vw', fmt(c.viewers)));
+  const cn = el('div', 'nm', c.name); cn.dir = 'auto';
+  b.append(cv, cn, el('div', 'gm', c.n + (c.n === 1 ? ' סטרימר' : ' סטרימרים')));
+  return b;
+}
+function lbPanel(title, sub, col, rows) {
+  const p = el('div', 'lb');
+  const h = el('h3'); h.append(el('span', '', title)); const i = el('i', '', 'i'); i.title = sub; h.append(i);
+  p.append(h, el('div', 'sub2', sub));
+  const hd = el('div', 'hd'); hd.append(el('span', '', 'ערוץ'), el('span', '', col)); p.append(hd);
+  if (!rows.length) { p.append(el('div', 'none', 'אין עדיין נתונים')); return p; }
+  const ol = el('ol');
+  rows.forEach(([s, val], k) => {
+    const li = el('li'); li.append(el('span', 'rank', k + 1), avEl(s));
+    const a = el('a', 'who', s.name); a.href = link(s); a.target = '_blank'; a.rel = 'noopener';
+    li.append(a, el('span', 'val', val)); ol.append(li);
+  });
+  p.append(ol); return p;
+}
+function renderHome() {
+  const has = streams.length > 0;
+  ['hero'].forEach(id => $(id).hidden = !has);
+  if (!has) {
+    $('forYou').replaceChildren(el('div', 'empty', 'אין כרגע שידורים בעברית'));
+    $('cats').replaceChildren(); $('lbs').replaceChildren(); $('catRows').replaceChildren();
+    $('catMore').hidden = true; $('allBtn').hidden = true; renderFeed(); return;
+  }
+  renderHero(); renderFeed();
+  // סטרימים בשבילך: מי שעוקבים אחריו קודם, אחר כך לפי צופים
+  const fy = [...streams].sort((a, b) => (isFollowed(b.slug) - isFollowed(a.slug)) || b.viewers - a.viewers).slice(0, 14);
+  const row = el('div', 'row'); fy.forEach((s, i) => row.append(card(s, i, {showGame: true})));
+  $('forYou').replaceChildren(mkRail(row));
+  // קטגוריות
+  const cs = categories();
+  const crow = el('div', 'row c9'); cs.slice(0, 30).forEach(c => crow.append(catTile(c)));
+  const cw = mkRail(crow); $('cats').replaceChildren(cw);
+  const more = $('catMore'); more.hidden = cs.length <= 9; more.textContent = 'הצג עוד';
+  more.onclick = () => { const x = crow.classList.toggle('expanded'); more.textContent = x ? 'הצג פחות' : 'הצג עוד'; cw.upd(); };
+  // לוחות מובילים
+  const byV = [...streams].sort((a, b) => b.viewers - a.viewers).slice(0, 3).map(s => [s, fmt(s.viewers)]);
+  const byT = streams.filter(s => s.started).sort((a, b) => a.started - b.started).slice(0, 3).map(s => [s, since(s.started)]);
+  $('lbs').replaceChildren(
+    lbPanel('הערוצים המובילים בצפייה', 'מתעדכן כל דקה', 'צופים', byV),
+    lbPanel('השידורים הארוכים ביותר', 'כמה זמן כל סטרימר כבר בשידור', 'משך', byT));
+  // שורות לפי קטגוריה
+  const box = $('catRows'); box.replaceChildren();
+  cs.slice(0, 8).forEach(c => {
+    const sec = el('section', 'sec');
+    const h = el('h3', 'h3'); const hb = el('button', '', c.name); hb.type = 'button'; hb.onclick = () => openGame(c.name);
+    h.append(hb, el('small', '', c.n + ' בשידור · ' + fmt(c.viewers) + ' צופים'));
+    const r = el('div', 'row c5'); c.list.sort((a, b) => b.viewers - a.viewers).slice(0, 14).forEach((s, i) => r.append(card(s, i)));
+    sec.append(h, mkRail(r)); box.append(sec);
+  });
+  $('allBtn').hidden = false; $('allBtn').textContent = 'לכל השידורים (' + fmt(streams.length) + ')';
+  updateBells();
+}
+
+/* מצב חיפוש / סינון */
+function renderChips() {
+  const c = new Map();
+  streams.forEach(s => { if (s.game) c.set(s.game, (c.get(s.game) || 0) + 1); });
+  const top = [...c.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14);
+  const box = $('chips'); box.replaceChildren();
+  if (!top.length) return;
+  const mk = (label, val, n) => {
+    const b = el('button', 'chip', label); b.type = 'button';
+    b.setAttribute('aria-pressed', String(gameFilter === val));
+    b.append(el('small', '', n));
+    b.onclick = () => { gameFilter = val; browseAll = true; updateView(); };
+    box.append(b);
+  };
+  mk('הכל', '', streams.length);
+  top.forEach(([g, n]) => mk(g, g, n));
+}
+function renderGrid() {
+  const q = $('q').value.trim().toLowerCase();
+  const v = streams.filter(s => (!gameFilter || s.game === gameFilter) &&
+    (!q || (s.name + ' ' + s.title + ' ' + s.game).toLowerCase().includes(q)));
+  const so = $('sort').value;
+  v.sort(so === 'n' ? (a, b) => a.name.localeCompare(b.name, 'he')
+       : so === 'g' ? (a, b) => (a.game || '~').localeCompare(b.game || '~', 'he') || b.viewers - a.viewers
+       : so === 's' ? (a, b) => b.started - a.started
+       : (a, b) => b.viewers - a.viewers);
+  $('browseTitle').textContent = q ? 'תוצאות חיפוש (' + v.length + ')' : (gameFilter || 'כל השידורים') + ' (' + v.length + ')';
+  const g = $('grid'); g.replaceChildren();
+  if (!v.length) { g.append(el('div', 'empty', streams.length ? 'אין תוצאות לסינון הזה' : 'אין כרגע שידורים בעברית')); return; }
+  v.forEach((s, i) => g.append(card(s, i, {showGame: true, rank: true})));
+  updateBells();
+}
+function updateView() {
+  const on = !!($('q').value.trim() || gameFilter || browseAll);
+  $('home').hidden = on; $('browse').hidden = !on;
+  if (on) { renderChips(); renderGrid(); } else renderHome();
+}
+
+/* ---------- GTA 6 ---------- */
+const GTA_CAT = /(gta|grand\s*theft\s*auto)\W*(6|vi)\b/i;
+const GTA_TXT = /(gta|grand\s*theft\s*auto)\W*(6|vi)\b|גי\W?טי\W?איי\W?6/i;
+function gtaRow(s, withGame) {
+  const li = el('li'); const a = el('a', '', s.name); a.href = link(s); a.target = '_blank'; a.rel = 'noopener';
+  li.append(a, el('span', 'm', fmt(s.viewers) + ' צופים' + (withGame && s.game ? ' · ' + s.game : ''))); return li;
+}
+function renderGta() {
+  const play = streams.filter(s => GTA_CAT.test(s.game)).sort((a, b) => b.viewers - a.viewers);
+  const ids = new Set(play.map(s => s.slug));
+  const men = streams.filter(s => !ids.has(s.slug) && GTA_TXT.test(s.title)).sort((a, b) => b.viewers - a.viewers);
+  $('gtaPlay').replaceChildren(...play.map(s => gtaRow(s, false)));
+  $('gtaMention').replaceChildren(...men.map(s => gtaRow(s, true)));
+  $('gtaMentionH').hidden = !men.length;
+  $('sbGta').textContent = play.length;
+  $('sbWho').replaceChildren(...play.slice(0, 10).map(s => { const a = el('a', '', s.name + ' · ' + fmt(s.viewers)); a.href = link(s); a.target = '_blank'; a.rel = 'noopener'; return a; }));
+  $('gtaTag').textContent = play.length ? play.length + ' משחקים עכשיו' : 'אף אחד לא משחק עכשיו';
+  const days = Math.ceil((GTA_RELEASE - Date.now()) / 86400000);
+  $('gtaNote').textContent = play.length ? '' : days > 0
+    ? 'המשחק יוצא ב-19.11.2026 (בעוד ' + days + ' ימים), כך שכנראה עוד אי אפשר לשחק בו.'
+    : 'אין כרגע סטרימר ישראלי בקטגוריית GTA 6 בקיק.';
+}
+
+/* ---------- מה חדש / בקרוב ---------- */
+function renderNew() {
+  const fresh = streams.filter(s => s.started && Date.now() - s.started < 3600000).sort((a, b) => b.started - a.started);
+  const jl = $('justLive'); jl.replaceChildren();
+  if (fresh.length) fresh.forEach(s => {
+    const li = el('li'); const a = el('a', '', s.name); a.href = link(s); a.target = '_blank'; a.rel = 'noopener';
+    li.append(a, el('span', 'm', (s.game ? s.game + ' · ' : '') + 'לפני ' + Math.max(1, Math.round((Date.now() - s.started) / 60000)) + ' דקות · ' + fmt(s.viewers) + ' צופים'));
+    jl.append(li);
+  });
+  else jl.append(el('li', '', streams.some(s => s.started) ? 'אף אחד לא עלה לשידור בשעה האחרונה' : 'אין נתוני שעת התחלה מ-Kick'));
+  const n = $('newN'); n.hidden = !fresh.length; n.textContent = fresh.length;
+}
+function renderStatic() {
+  $('changelog').replaceChildren(...CHANGELOG.map(([t, tag]) => { const li = el('li'); const s = el('span'); s.append(el('span', 'tag', tag), t); li.append(s); return li; }));
+  $('roadmap').replaceChildren(...ROADMAP.map(t => { const li = el('li'); const s = el('span'); s.append(el('span', 'tag plan', 'בתכנון'), t); li.append(s); return li; }));
+}
+
+// תחילת הסאבתון: 19.11.2026 בשעון ישראל. אפשר לשנות שעה מדויקת כאן, למשל T20:00:00+02:00
+const SUB_START = new Date('2026-11-19T00:00:00+02:00');
+function subStatus() {
+  const d = Date.now() - SUB_START;
+  if (d < 0) return null;
+  const days = Math.floor(d / 86400000), hrs = Math.floor(d % 86400000 / 3600000);
+  const o = streams.find(s => s.slug.toLowerCase() === 'odedsvr' || s.name.toLowerCase() === 'odedsvr');
+  let t = 'יום ' + (days + 1) + ' בסאבתון · עברו ' + (days ? days + (days === 1 ? ' יום ו-' : ' ימים ו-') : '') + hrs + ' שעות';
+  t += o ? ' · ODEDSVR בלייב עכשיו' + (o.started ? ' (' + since(o.started) + ')' : '') : (streams.length ? ' · ODEDSVR לא בלייב כרגע' : '');
+  return t;
+}
+function updateSub() {
+  let d = SUB_START - Date.now();
+  const started = d <= 0; if (started) d = 0;
+  const x = Math.floor(d / 1000), D = Math.floor(x / 86400), H = Math.floor(x % 86400 / 3600), M = Math.floor(x % 3600 / 60), S = x % 60;
+  $('sbD').textContent = D; $('sbH').textContent = H; $('sbM').textContent = M; $('sbS').textContent = S;
+  document.querySelector('.sub .cd').hidden = started;
+  $('sbDone').hidden = !started;
+  $('sbNote').textContent = started ? subStatus() : 'הספירה לאחור עד תחילת הסאבתון';
+  const p = n => String(n).padStart(2, '0');
+  $('stripT').textContent = started ? subStatus() : (D ? 'בעוד ' + D + ' ימים ' : 'בעוד ') + p(H) + ':' + p(M) + ':' + p(S);
+}
+function updateCountdown() {
+  let d = GTA_RELEASE - Date.now();
+  const out = d <= 0; if (out) d = 0;
+  $('cd').hidden = out;
+  $('cdNote').textContent = out ? 'GTA 6 יצא!' : 'הספירה לאחור עד היציאה, לפי המועד שפרסמה Rockstar';
+  if (out) $('cdNote').style.cssText = 'color:var(--green);font-size:22px;font-weight:900';
+  const x = Math.floor(d / 1000);
+  $('cdD').textContent = Math.floor(x / 86400);
+  $('cdH').textContent = Math.floor(x % 86400 / 3600);
+  $('cdM').textContent = Math.floor(x % 3600 / 60);
+  $('cdS').textContent = x % 60;
+}
+
+/* ---------- כללי ---------- */
+function show(list) {
+  streams = list; last = Date.now();
+  $('count').textContent = fmt(list.length);
+  $('viewers').textContent = fmt(list.reduce((a, s) => a + s.viewers, 0));
+  $('games').textContent = fmt(new Set(list.map(s => s.game).filter(Boolean)).size);
+  $('msg').replaceChildren();
+  if (gameFilter && !list.some(s => s.game === gameFilter)) gameFilter = '';
+  record(list); checkFollows(list); renderStats(); renderDayTab(); renderGta(); renderNew(); renderFollow(); updateView(); updateStatus();
+}
+function updateStatus() {
+  if (!last) return;
+  const left = Math.max(0, REFRESH_MS - (Date.now() - last));
+  $('ring').style.setProperty('--p', (100 - left / REFRESH_MS * 100) + '%');
+  $('status').textContent = 'עודכן ' + new Date(last).toLocaleTimeString('he-IL') + ' · רענון בעוד ' + Math.ceil(left / 1000) + ' שניות';
+}
+async function refresh() {
+  loadUsers();
+  $('status').textContent = 'טוען…';
+  if (!streams.length) { skeleton($('forYou'), 6); skeleton($('cats'), 9, true); }
+  try { const [list] = await Promise.all([loadAll(), loadThumbs()]); show(list); }
+  catch (e) {
+    $('status').textContent = 'הטעינה נכשלה';
+    if (!streams.length) { $('forYou').replaceChildren(); $('cats').replaceChildren(); }
+    const d = el('div', 'err'); const b = el('b', '', 'לא הצלחתי לקבל נתונים מ-Kick. ');
+    d.append(b, 'פתח את /api/live בדפדפן כדי לראות את סיבת השגיאה.');
+    const p = el('div', '', e.message); p.style.cssText = 'direction:ltr;color:var(--mute);margin-top:6px;font-size:12px';
+    d.append(p); $('msg').replaceChildren(d);
+  }
+}
+function setTab(name) {
+  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  ['live', 'follow', 'stats', 'new', 'soon'].forEach(n => $('p-' + n).hidden = n !== name);
+  history.replaceState(null, '', '#' + name);
+}
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => setTab(b.dataset.tab));
+document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { setTab(b.dataset.go); scrollTo(0, 0); });
+$('refresh').onclick = () => { refresh(); clearInterval(timer); timer = setInterval(refresh, REFRESH_MS); };
+$('q').oninput = () => { if ($('q').value.trim()) setTab('live'); updateView(); };
+$('sort').onchange = renderGrid;
+$('backHome').onclick = () => { $('q').value = ''; gameFilter = ''; browseAll = false; updateView(); };
+$('allBtn').onclick = () => { browseAll = true; gameFilter = ''; updateView(); scrollTo(0, 0); };
+$('heroPrev').onclick = () => goHero(heroIdx - 1);
+$('heroTb').onclick = () => { const s = heroList[heroIdx]; if (s) openThumbEditor(s); };
+$('heroNext').onclick = () => goHero(heroIdx + 1);
+$('useManual').onclick = () => {
+  try { show(dedupe(listOf(JSON.parse($('manual').value)).map(normalize))); }
+  catch (e) { $('status').textContent = 'JSON לא תקין'; }
+};
+
+$('addBtn').onclick = addFollow;
+$('addIn').onkeydown = e => { if (e.key === 'Enter') addFollow(); };
+function addFollow() {
+  const slug = cleanSlug($('addIn').value);
+  if (!slug) return;
+  if (!isFollowed(slug)) { follows.push({slug, name: slug}); saveFollows(); }
+  $('addIn').value = ''; renderFollow(); updateBells();
+}
+$('permBtn').onclick = async () => { try { await Notification.requestPermission(); } catch (_) {} renderPerm(); };
+renderPerm(); renderFollow(); loadAccount();
+renderStatic(); updateCountdown(); updateSub();
+(function () {
+  const bell = $('nbell'), panel = $('npanel'), bd = $('nbd'), SK = 'kickil_seen_ver';
+  let seen = ''; try { seen = localStorage.getItem(SK) || ''; } catch (_) {}
+  const unseen = seen !== VERSION;
+  if (unseen) { bd.hidden = false; bd.textContent = 'חדש'; bell.classList.add('shake'); }
+  const build = () => {
+    const h = el('h3'); h.append('מה חדש ', el('span', '', 'בגרסה הזו'));
+    const ul = el('ul');
+    CHANGELOG.slice(0, 8).forEach(([t, tag]) => { const li = el('li'); li.append(el('span', 'tag', tag), t); ul.append(li); });
+    const more = el('button', 'ghost', 'לכל העדכונים'); more.type = 'button'; more.style.marginTop = '10px';
+    more.onclick = () => { close(); setTab('new'); scrollTo(0, 0); };
+    panel.replaceChildren(h, el('div', 'vd', 'גרסה ' + VERSION), ul, more);
+  };
+  const place = () => { const r = bell.getBoundingClientRect(), w = Math.min(390, innerWidth - 24); panel.style.top = (r.bottom + 8) + 'px'; panel.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + 'px'; };
+  function close() { panel.hidden = true; bell.setAttribute('aria-expanded', 'false'); }
+  function open() {
+    build(); panel.hidden = false; place(); bell.setAttribute('aria-expanded', 'true');
+    bd.hidden = true; bell.classList.remove('shake'); try { localStorage.setItem(SK, VERSION); } catch (_) {}
+  }
+  bell.onclick = e => { e.stopPropagation(); panel.hidden ? open() : close(); };
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target)) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  addEventListener('resize', () => { if (!panel.hidden) place(); });
+})();
+(function () {
+  const a = $('bgm'), btn = $('mbtn'), vol = $('mvol'), K = 'kickil_music', KV = 'kickil_music_vol', KT = 'kickil_music_t';
+  const get = k => { try { return localStorage.getItem(k) || ''; } catch (_) { return ''; } };
+  const set = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
+  const x = parseFloat(get(KV)); a.volume = x >= 0 && x <= 1 ? x : .35; vol.value = a.volume;
+  const t = parseFloat(get(KT));
+  if (t > 0) a.addEventListener('loadedmetadata', () => { if (t < a.duration - 5) a.currentTime = t; }, {once: true});
+  const paint = () => { const on = !a.paused; btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); btn.title = on ? 'השתק מוזיקה' : 'הפעל מוזיקה'; btn.setAttribute('aria-label', btn.title); };
+  const play = () => a.play().then(paint, () => {});
+  a.addEventListener('play', paint); a.addEventListener('pause', paint);
+  btn.onclick = () => { if (a.paused) { set(K, 'on'); play(); } else { set(K, 'off'); a.pause(); } };
+  vol.oninput = () => { a.volume = +vol.value; set(KV, vol.value); };
+  setInterval(() => { if (!a.paused) set(KT, a.currentTime); }, 5000);
+  if (get(K) !== 'off') {
+    play();
+    const go = e => { if (e.target.closest && e.target.closest('.mus')) return; if (get(K) !== 'off' && a.paused) play(); };
+    ['pointerdown', 'keydown'].forEach(ev => addEventListener(ev, go, {passive: true}));
+    a.addEventListener('play', () => ['pointerdown', 'keydown'].forEach(ev => removeEventListener(ev, go)), {once: true});
+  }
+})();
+(function () {
+  const fT = new Intl.DateTimeFormat('en-GB', {timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'});
+  const fD = new Intl.DateTimeFormat('he-IL', {timeZone: 'Asia/Jerusalem', weekday: 'short', day: 'numeric', month: 'short'});
+  let lastD = '';
+  const tickClock = () => {
+    const n = new Date(), [h, m, sec] = fT.format(n).split(':');
+    $('ckT').textContent = h + ':' + m; $('ckS').textContent = ':' + sec;
+    const d = fD.format(n); if (d !== lastD) { lastD = d; $('ckD').textContent = d; }
+  };
+  tickClock(); setInterval(tickClock, 1000);
+})();
+$('strip').onclick = () => { setTab('soon'); scrollTo(0, 0); };
+tick = setInterval(() => { updateStatus(); updateCountdown(); updateSub(); }, 1000);
+const h = location.hash.slice(1); if (['live', 'follow', 'stats', 'new', 'soon'].includes(h)) setTab(h);
+refresh(); timer = setInterval(refresh, REFRESH_MS);
+
+</script>
+</body>
+</html>
